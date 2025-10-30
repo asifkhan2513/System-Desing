@@ -1,0 +1,57 @@
+################################################################
+Low-Level Design (LLD)
+LLD is the highly detailed design that lives inside each component outlined in the HLD. It moves from the abstract blueprint to the concrete implementation details a developer needs to start coding.
+
+Definition: The LLD details the component logic, often defining the internal data structures, classes, modules, functions, and database schemas. It specifies the logic required to implement a specific system feature.
+The Engineer's Job: The engineer/contractor uses the blueprints but also needs the specific details to execute the plan. They decide:
+How many electrical sockets go in the kitchen.
+The exact specification for the kitchen sink plumbing (e.g., pipe size and material).
+The specific SQL commands or object-relational mapping (ORM) required for a function.
+System Example: For the social media platform's User Service (a component from the HLD), the LLD specifies:
+The User class should have private fields like userId (UUID), username, and passwordHash.
+The registerUser(details) function performs input validation, encrypts the password, and calls a specific SQL stored procedure.
+The exact schema for the users table (e.g., username column must be unique and indexed).
+
+##########################################################
+
+LLD interview is also called Object oriented system design interview.
+1. All OOPS concepts - what are - Classes, Objects, inheritance, Abstraction, polymorphism 
+2. SOLID principles
+3. Design patterns - Factory, Abstract Factory, Singleton and observer, builder, decorator, facade, adaptor.
+4. Drawing class diagrams properly. ( As a , Has a ). UML conventions
+5. Sequence diagrams, Usecase diagrams
+6. Test cases - How to design edge cases.
+7. Multi threading, thread safety. 
+8. Common examples - 
+
+1. Hotel management
+2. Elevator management
+3. Car parking system.
+4. Chess
+5. Tic Tac Toe
+6. Ticket booking 
+7. ATM
+
+
+Must know design pattern
+1. Singleton
+2. Factory
+3. Abstract Factory
+4. Observer
+5. Builder
+6. Decorator
+7. Adaptor
+8. Strategy
+9. Facade
+
+Some common LLD problems:
+1. Hotel Management
+2. Car parking
+3. Elevator
+4. Chess
+5. Tic Tac Toe
+6. Ticket Booking
+7. ATM
+
+
+################################################################

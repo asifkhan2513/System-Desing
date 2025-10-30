@@ -1,0 +1,133 @@
+🔧 System Design Prompt: Design a Scalable URL Shortener
+Design a URL shortening service like Bit.ly or TinyURL that provides the following functionality:
+
+🧩 Functional Requirements:
+Shorten a given long URL (e.g., https://example.com/article/123456) to a short one (e.g., http://short.ly/abc123)
+
+Redirect a user to the original URL when they access the shortened link.
+
+Support for custom aliases (e.g., http://short.ly/myalias)
+
+Analytics (optional): Track click count, geolocation, browser type.
+
+Expiration (optional): Support setting a time-to-live (TTL) for short URLs.
+
+🧠 Non-Functional Requirements:
+Scalability: Should handle millions of URLs and billions of redirections.
+
+Availability: High availability for redirection.
+
+Latency: Redirection must be low-latency.
+
+Durability: URLs should not be lost.
+
+Security: Prevent abuse (e.g., spam or phishing URLs).
+
+🔍 Key Design Points to Cover
+1. High-Level System Architecture
+Design REST APIs for:
+
+POST /shorten: To shorten a long URL
+
+GET /{shortUrl}: To redirect to the original URL
+
+Include Load Balancers, Application Servers, Database, Caching, etc.
+
+Discuss how requests flow through the system.
+
+2. Encoding Algorithm for URL Generation
+Base62 encoding (characters 0-9, a-z, A-Z): Good balance between shortness and uniqueness.
+
+Short URL ID generation strategies:
+
+Hash-based (MD5, SHA256)
+
+Auto-increment ID + Base62 encode
+
+UUID truncated
+
+Discuss collision handling, custom alias support, and URL uniqueness.
+
+Example: If using a 6-character Base62 string, you get 62⁶ ≈ 56.8 billion combinations.
+
+3. Database Design
+Relational (e.g., PostgreSQL) vs NoSQL (e.g., DynamoDB, Cassandra)
+
+Schema:
+
+scss
+Copy
+Edit
+ShortURL(id, original_url, created_at, expiration_time, custom_alias, click_count)
+Indexing for fast lookups and insertion.
+
+Discuss sharding strategies for scalability.
+
+4. Storage Estimation
+Estimate the size of:
+
+Original URL (avg. 100 bytes)
+
+Short URL key (6–8 chars, Base62)
+
+Metadata (timestamps, analytics)
+
+Estimate total storage required for 1 billion URLs.
+
+Rough estimate: ~200 bytes per record → ~200 GB for 1B URLs.
+
+5. Caching Layer
+Use Redis/Memcached to store frequently accessed short URLs.
+
+Reduces DB hits for popular links (hot URLs).
+
+Discuss TTL policy, cache invalidation, and cache hit/miss strategy.
+
+6. Redirection Mechanism
+On GET /{shortUrl}:
+
+Check in Cache → If not found → Query DB → Redirect
+
+Return 302 Found (temporary) or 301 Moved Permanently (permanent)
+
+7. Rate Limiting & Abuse Detection
+Prevent abuse like spamming or DDoS:
+
+API rate limiting per IP/user
+
+CAPTCHA on suspicious activity
+
+Blacklist for malicious URLs
+
+Can use services like Google Safe Browsing API.
+
+8. Analytics and Tracking (Optional)
+Count how many times a short URL is used
+
+Log IP, browser, location
+
+Store data in time-series DB (e.g., InfluxDB) or analytical store (BigQuery, Redshift)
+
+9. Scalability and Availability
+Horizontal scaling for stateless app servers
+
+Use of consistent hashing for distributed DB and cache
+
+Replication and partitioning in DB
+
+Multi-region deployment for redundancy and latency optimization
+
+10. Security
+Input sanitization to avoid XSS, SQLi
+
+Prevent redirection loops or recursive shortening
+
+Ensure URLs do not redirect to phishing or harmful sites
+
+11. Testing and Monitoring
+Unit + integration tests for API endpoints
+
+Monitoring tools (Prometheus + Grafana)
+
+Alerts on DB/cache/server errors
+

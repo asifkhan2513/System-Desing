@@ -1,0 +1,9 @@
+implemnt the simple circuit breaker (OB) see if  you can use redis  pubsub here 
+ write the simple servoce that check this setting everything before calling 
+
+
+  eg : post service  serve the post 
+  profile service serve profile 
+  post services call profile for into 
+  if circuit is trippet do not make a call to profile
+  

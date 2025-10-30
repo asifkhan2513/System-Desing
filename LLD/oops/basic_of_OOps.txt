@@ -1,0 +1,12 @@
+class ==> blueprint of the Objects
+object ==> real world entity
+Abstraction ==>
+encapsulation ==> 
+inheritance ==> all type of inheritance
+
+polymorphism ==> method overloading and riding 
+1. Function Overloading : Also known as compile-time polymorphism, this occurs when two or ore functions in the same class share the same name but have different parameters lists (different number or types of parameters). The return type of these functions may or may not be same.
+
+2. Function Overriding : Also, known as run-time polymorphism, this occurs when a function in the derived class has the same name, return type, and parameters as a function in the base class. In C++, this is achieve using virtual functions, so that the derived class provides its own implementation of the method.
+
+Below is the implementation of both the concepts:

@@ -1,0 +1,6 @@
+setup redis locally
+go through the redis pubsub documentAtion 
+real time   baoadcaste  ( there sould be  multiple terminal  )
+test if persist the message 
+check if the new user get the old message 
+  
